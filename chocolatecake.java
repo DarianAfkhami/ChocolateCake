@@ -3,19 +3,17 @@ public class chocolatecake
 {
 	private int rows,cols;
 	String[][] letterBlock;
-	private String message;
-	public chocolatecake(int r, int c)
-	{
-		rows = r;
-		cols = c;
-	}
+	private String message = "";
+
 	public String[][] getLetterBlock()
 	{
 		return letterBlock;
 	}
 
-	public void fillBlock(String str)
+	public void fillBlock(String str, int r, int c)
 	{
+		rows = r;
+		cols = c;
 		letterBlock = new String[rows][cols];
 		
 		if(str.length() >= rows*cols)
@@ -29,7 +27,7 @@ public class chocolatecake
 					letterBlock[y][x] = str.substring(tracker, tracker+1);
 					if(letterBlock[y][x].equals(" "))
 					{
-						letterBlock[y][x] = "x";
+						letterBlock[y][x] = "'";
 					}
 					tracker++;
 				}
@@ -48,7 +46,7 @@ public class chocolatecake
 						letterBlock[y][x] = str.substring(tracker, tracker+1);
 						if(letterBlock[y][x].equals(" "))
 						{
-							letterBlock[y][x] = "x";						
+							letterBlock[y][x] = "'";						
 						}
 					}
 					else
@@ -71,24 +69,18 @@ public class chocolatecake
 		}
 	}
 	
-	public void encryptBlock()
+	public String encryptBlock()
 	{
 		for(int x=0;x<cols;x++)
 		{
 			for(int y=0;y<rows;y++)
 			{
-				letterBlock[y][x] = letterBlock[x][y];
+				message = message + letterBlock[y][x];
 			}
 		}
 		
 		System.out.println("ENCRYPT BLOCK: ");
-		for(int y=0;y<rows;y++)
-		{
-			for(int x=0;x<cols;x++)
-			{
-			System.out.print(letterBlock[x][y]);
-			}
-		}
-	
+		System.out.println(message);
+		return message;
 	}
 }
